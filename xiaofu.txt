@@ -1,0 +1,97 @@
+小程序，
+用户(student)
+---
+id
+
+---以下信息均无感获取，不用用户输入
+gender                  性别：0-未知、1-男、2-女
+mobile                  手机号（qq绑定手机号）
+nick_name               QQ昵称
+qq_applet_openid        QQ小程序openid
+qq_unionid              QQunionid
+qq_avatar_url           QQ头像地址
+
+status                  学生身份认证状态：0-未认证、1-已认证
+
+create_time
+update_time
+
+用户附件表（student_attachment）-- 目前只有学生证
+id
+student_id
+student_id_card         学生证链接
+create_time
+
+用户年级学院关联表(student_grade_institute)
+---
+student_id
+grade_id                三个id作为联合主键
+institute_id
+
+create_time
+
+年级(grade)(初始化后一般不做修改)
+---
+id
+grade_name              年级名称
+create_time
+
+学院(institute)(初始化后一般不做修改)
+---
+id
+institute_name          学院名称
+create_time
+
+帖子(forum_posts)
+---
+id
+student_id                 用户id
+content                 帖子内容
+
+view_account            查看数量
+relay_account           回帖数量
+like_account            点赞数量
+
+deleted                 0-正常，1-删除(只做逻辑删除，不做物理删除)
+create_time
+update_time
+
+    帖子位置（forum_location）
+    ---
+    id
+    posts_id
+    longitude           经度
+    latitude            纬度
+    create_time
+
+    帖子图片附件（多张）（forum_image）
+    ---
+    id
+    posts_id         帖子id
+    image_url          图片链接
+    create_time
+
+    图片视频（forum_video）
+    ---
+    id
+    posts_id             帖子id
+    video_url            图片链接
+    create_time
+
+
+(回帖)forum_posts_relay
+------
+id
+posts_id                 帖子id
+student_id               回帖用户id
+content                  内容
+
+deleted                 0-正常，1-删除(只做逻辑删除，不做物理删除)
+create_time
+update_time
+
+
+
+
+
+
