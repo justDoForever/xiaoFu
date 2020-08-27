@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xiaofu.dao.DemoDao;
-import com.xiaofu.enums.ResponseEnum;
-import com.xiaofu.response.ResultInfo;
+import com.xiaofu.domain.enums.ResponseEnum;
+import com.xiaofu.domain.response.ResultInfo;
 import com.xiaofu.service.DemoService;
 
 /**

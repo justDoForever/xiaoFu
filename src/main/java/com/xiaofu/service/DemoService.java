@@ -1,6 +1,6 @@
 package com.xiaofu.service;
 
-import com.xiaofu.response.ResultInfo;
+import com.xiaofu.domain.response.ResultInfo;
 
 /**
  * DemoService.

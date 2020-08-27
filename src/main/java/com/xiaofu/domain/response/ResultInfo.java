@@ -1,6 +1,6 @@
-package com.xiaofu.response;
+package com.xiaofu.domain.response;
 
-import com.xiaofu.enums.ResponseEnum;
+import com.xiaofu.domain.enums.ResponseEnum;
 
 /**
  * ResponseEntity.

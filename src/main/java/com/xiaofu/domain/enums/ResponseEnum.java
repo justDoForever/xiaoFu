@@ -1,4 +1,4 @@
-package com.xiaofu.enums;
+package com.xiaofu.domain.enums;
 
 /**
  * ResponseEnum.

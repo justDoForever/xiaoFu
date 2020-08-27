@@ -10,15 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xaiofu</groupId>
     <artifactId>xiaofu</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <modules>
-        <module>controller</module>
-        <module>service</module>
-        <module>domain</module>
-        <module>dao</module>
-        <module>util</module>
-    </modules>
     <name>xiaofu</name>
     <description>Demo project for Spring Boot</description>
 
@@ -29,17 +22,43 @@
         <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+
+
+        <!-- import swagger2-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
+        <!--mysql-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.42</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

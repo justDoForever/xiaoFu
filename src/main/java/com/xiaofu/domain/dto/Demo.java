@@ -1,4 +1,4 @@
-package com.xiaofu.domain;
+package com.xiaofu.domain.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -41,8 +41,12 @@ public class Demo implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Demo that = (Demo) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name);
