@@ -16,6 +16,11 @@ spring:
     url: jdbc:mysql://localhost:3306/xiaofu?useUnicode=true&useAffectedRows=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull
     username: root
     password: 123456
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
 
 mybatis:
   mapper-locations: classpath:mapper/*xml
@@ -23,6 +28,22 @@ mybatis:
 ---
 spring:
   profiles: dev
+
+## oss 需要配置对应的bucketName和accessKey
+oss:
+  bucketName:
+  accessKey:
+  accessKeySecret:
+  endPoint: oss-cn-beijing.aliyuncs.com
+  domainAddress:
+  productClauseFilePath:
+  tempFilePath:
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+fileUrl: localhost:8000/file/download?filePath=
 
 ---
 spring:

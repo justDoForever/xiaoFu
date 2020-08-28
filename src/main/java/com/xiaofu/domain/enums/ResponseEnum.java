@@ -12,6 +12,11 @@ public enum ResponseEnum {
     SUCCESS(10000, "成功"),
 
     /**
+     * 文件上传失败
+     */
+    FILE_UPLOAD_ERROR(100001, "文件上传失败"),
+
+    /**
      * 自定义异常.
      */
     CUSTOM_ERROR(10098, "自定义异常"),
