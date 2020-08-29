@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaofu.dao.ForumPostsDao" >
+  <resultMap id="BaseResultMap" type="com.xiaofu.domain.dto.ForumPosts" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="view_account" property="viewAccount" jdbcType="VARCHAR" />
+    <result column="relay_account" property="relayAccount" jdbcType="VARCHAR" />
+    <result column="like_account" property="likeAccount" jdbcType="VARCHAR" />
+    <result column="deleted" property="deleted" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xiaofu.domain.dto.ForumPosts" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, student_id, view_account, relay_account, like_account, deleted, create_time, 
+    update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from forum_posts
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from forum_posts
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaofu.domain.dto.ForumPosts" keyProperty="id" useGeneratedKeys="true">
+    insert into forum_posts (id, student_id, view_account, 
+      relay_account, like_account, deleted, 
+      create_time, update_time, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{viewAccount,jdbcType=VARCHAR}, 
+      #{relayAccount,jdbcType=VARCHAR}, #{likeAccount,jdbcType=VARCHAR}, #{deleted,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaofu.domain.dto.ForumPosts" keyProperty="id" useGeneratedKeys="true">
+    insert into forum_posts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="viewAccount != null" >
+        view_account,
+      </if>
+      <if test="relayAccount != null" >
+        relay_account,
+      </if>
+      <if test="likeAccount != null" >
+        like_account,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="viewAccount != null" >
+        #{viewAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="relayAccount != null" >
+        #{relayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="likeAccount != null" >
+        #{likeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaofu.domain.dto.ForumPosts" >
+    update forum_posts
+    <set >
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="viewAccount != null" >
+        view_account = #{viewAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="relayAccount != null" >
+        relay_account = #{relayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="likeAccount != null" >
+        like_account = #{likeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xiaofu.domain.dto.ForumPosts" >
+    update forum_posts
+    set student_id = #{studentId,jdbcType=INTEGER},
+      view_account = #{viewAccount,jdbcType=VARCHAR},
+      relay_account = #{relayAccount,jdbcType=VARCHAR},
+      like_account = #{likeAccount,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaofu.domain.dto.ForumPosts" >
+    update forum_posts
+    set student_id = #{studentId,jdbcType=INTEGER},
+      view_account = #{viewAccount,jdbcType=VARCHAR},
+      relay_account = #{relayAccount,jdbcType=VARCHAR},
+      like_account = #{likeAccount,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
