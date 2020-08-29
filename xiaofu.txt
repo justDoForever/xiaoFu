@@ -56,27 +56,36 @@ deleted                 0-正常，1-删除(只做逻辑删除，不做物理删
 create_time
 update_time
 
+
+    ---- 附件新增前删除原始的文件再执行插入（逻辑删除）-----
+
     帖子位置（forum_location）
     ---
     id
     posts_id
     longitude           经度
     latitude            纬度
+    deleted             0-正常，1-删除(只做逻辑删除，不做物理删除)
     create_time
+    update_time
 
     帖子图片附件（多张）（forum_image）
     ---
     id
-    posts_id         帖子id
+    posts_id           帖子id
     image_url          图片链接
+    deleted            0-正常，1-删除(只做逻辑删除，不做物理删除)
     create_time
+    update_time
 
     图片视频（forum_video）
     ---
     id
     posts_id             帖子id
     video_url            图片链接
+    deleted               0-正常，1-删除(只做逻辑删除，不做物理删除)
     create_time
+    update_time
 
 
 (回帖)forum_posts_relay
