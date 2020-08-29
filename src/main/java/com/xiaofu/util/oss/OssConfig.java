@@ -4,9 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * OssConfig.
- *
- * @author Yang 2019-12-16 10:50
+ * @author Yang-o_o 2020-08-28 14:10
  */
 @Component
 @ConfigurationProperties(prefix = "oss")

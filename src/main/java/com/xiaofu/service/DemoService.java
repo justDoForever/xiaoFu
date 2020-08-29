@@ -3,8 +3,6 @@ package com.xiaofu.service;
 import com.xiaofu.domain.response.ResultInfo;
 
 /**
- * DemoService.
- *
  * @author Yang-o_o 2020-08-24 14:10
  */
 public interface DemoService {

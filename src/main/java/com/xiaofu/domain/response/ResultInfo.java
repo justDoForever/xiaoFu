@@ -3,9 +3,7 @@ package com.xiaofu.domain.response;
 import com.xiaofu.domain.enums.ResponseEnum;
 
 /**
- * ResponseEntity.
- *
- * @author Yang-o_o 2020-08-24 15:44
+ * @author Yang-o_o 2020-08-24 14:10
  */
 public class ResultInfo<T> {
 

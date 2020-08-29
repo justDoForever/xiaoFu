@@ -9,9 +9,7 @@ import com.xiaofu.domain.response.ResultInfo;
 import com.xiaofu.service.DemoService;
 
 /**
- * DemoServiceImpl.
- *
- * @author Yang-o_o 2020-08-24 14:11
+ * @author Yang-o_o 2020-08-24 14:10
  */
 @Service
 public class DemoServiceImpl implements DemoService {

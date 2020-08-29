@@ -23,9 +23,7 @@ import com.xiaofu.util.oss.OssConfig;
 import com.xiaofu.util.oss.OssUtil;
 
 /**
- * UpLoadController.
- *
- * @author Yang 2020-06-05 14:26
+ * @author Yang-o_o 2020-08-28 14:10
  */
 @Api(value = "FileUploadController", tags = {"文件接口"})
 @RestController

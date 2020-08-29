@@ -10,9 +10,7 @@ import com.xiaofu.domain.response.ResultInfo;
 import com.xiaofu.service.DemoService;
 
 /**
- * DemoControler.
- *
- * @author Yang-o_o 2020-08-24 14:08
+ * @author Yang-o_o 2020-08-24 14:10
  */
 @Api(value = "DemoController", tags = {"测试接口"})
 @RestController

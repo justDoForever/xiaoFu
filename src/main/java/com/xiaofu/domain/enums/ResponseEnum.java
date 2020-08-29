@@ -1,9 +1,7 @@
 package com.xiaofu.domain.enums;
 
 /**
- * ResponseEnum.
- *
- * @author Yang-o_o 2020-08-24 15:45
+ * @author Yang-o_o 2020-08-24 14:10
  */
 public enum ResponseEnum {
     /**

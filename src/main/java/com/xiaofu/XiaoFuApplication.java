@@ -16,7 +16,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * @author yang-o_o
+ * @author yang-o_o 2020-08-24 14:00
  */
 @SpringBootApplication
 @MapperScan(annotationClass = Repository.class, basePackages = { "com.xiaofu.dao" })

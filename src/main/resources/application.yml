@@ -22,6 +22,15 @@ spring:
       max-file-size: 100MB
       max-request-size: 100MB
 
+# okhttp
+ok:
+  http:
+    connect-timeout: 30
+    read-timeout: 30
+    write-timeout: 30
+    max-idle-connections: 200 # 最大空闲连接的数量
+    keep-alive-duration: 300 # 连接空闲时间
+
 mybatis:
   mapper-locations: classpath:mapper/*xml
 

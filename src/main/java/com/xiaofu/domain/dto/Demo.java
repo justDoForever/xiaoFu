@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * DemoService.
- *
- * @author Yang-o_o 2020-08-24 15:01
+ * @author Yang-o_o 2020-08-24 14:10
  */
 public class Demo implements Serializable {
     private static final long serialVersionUID = -538911355985611624L;

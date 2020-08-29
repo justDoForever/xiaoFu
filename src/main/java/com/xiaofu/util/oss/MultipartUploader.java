@@ -24,9 +24,7 @@ import com.aliyun.oss.model.UploadPartRequest;
 import com.aliyun.oss.model.UploadPartResult;
 
 /**
- * MultipartUploader.
- *
- * @author Yang 2020-04-20 17:09
+ * @author Yang-o_o 2020-08-28 14:10
  */
 public class MultipartUploader implements Runnable {
 

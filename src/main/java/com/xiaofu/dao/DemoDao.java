@@ -3,8 +3,6 @@ package com.xiaofu.dao;
 import org.springframework.stereotype.Repository;
 
 /**
- * DemoDao.
- *
  * @author Yang-o_o 2020-08-24 14:10
  */
 @Repository

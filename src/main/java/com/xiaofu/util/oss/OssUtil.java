@@ -19,9 +19,7 @@ import com.aliyun.oss.model.ObjectMetadata;
 import org.apache.tomcat.util.threads.ThreadPoolExecutor;
 
 /**
- * OssUtil.
- *
- * @author Yang 2019-12-16 10:39
+ * @author Yang-o_o 2020-08-28 14:10
  */
 public class OssUtil {
 

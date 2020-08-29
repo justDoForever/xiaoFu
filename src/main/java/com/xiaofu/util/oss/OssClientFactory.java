@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component;
 import com.aliyun.oss.OSSClient;
 
 /**
- * OssClientFactory.
- *
- * @author Yang 2019-12-16 10:41
+ * @author Yang-o_o 2020-08-28 14:10
  */
 @Component
 public class OssClientFactory {
