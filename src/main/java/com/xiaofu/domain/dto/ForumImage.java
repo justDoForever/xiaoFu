@@ -28,6 +28,12 @@ public class ForumImage {
   		this.updateTime = updateTime;
   	}
 
+    public ForumImage(Integer postsId, Boolean deleted, Date updateTime) {
+        this.postsId = postsId;
+        this.deleted = deleted;
+        this.updateTime = updateTime;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

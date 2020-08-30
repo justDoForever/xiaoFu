@@ -3,12 +3,20 @@ package com.xiaofu.domain.dto;
 import java.util.List;
 
 public class ForumInfo {
+    private Integer id;
     private Integer studentId;
     private String context;
     private Location location;
     private List<String> imageUrl;
     private String videoUrl;
-    
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     /**
      * @return String return the studentId

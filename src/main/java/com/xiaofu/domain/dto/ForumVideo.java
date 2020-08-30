@@ -24,7 +24,19 @@ public class ForumVideo {
 		this.updateTime = updateTime;
 	}
 
-	public Integer getId() {
+    public ForumVideo(Integer postsId, Boolean deleted, Date updateTime) {
+        this.postsId = postsId;
+        this.deleted = deleted;
+        this.updateTime = updateTime;
+    }
+
+    public ForumVideo(Integer id, String videoUrl, Date updateTime) {
+        this.id = id;
+        this.videoUrl = videoUrl;
+        this.updateTime = updateTime;
+    }
+
+    public Integer getId() {
         return id;
     }
 

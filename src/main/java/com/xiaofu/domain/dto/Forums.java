@@ -1,8 +1,9 @@
 package com.xiaofu.domain.dto;
 
 import java.util.Date;
+import java.util.List;
 
-public class ForumPosts {
+public class Forums {
     private Integer id;
 
     private Integer studentId;
@@ -20,33 +21,9 @@ public class ForumPosts {
     private Date updateTime;
 
     private String content;
-
-   
-
-	public ForumPosts(Integer studentId, String content, String viewAccount, String relayAccount, String likeAccount, String deleted,
-			Date createTime, Date updateTime) {
-		super();
-		this.studentId = studentId;
-		this.viewAccount = viewAccount;
-		this.relayAccount = relayAccount;
-		this.likeAccount = likeAccount;
-		this.deleted = deleted;
-		this.createTime = createTime;
-		this.updateTime = updateTime;
-		this.content = content;
-	}
-
-    public ForumPosts(Integer id, String deleted, Date updateTime) {
-        this.id = id;
-        this.deleted = deleted;
-        this.updateTime = updateTime;
-    }
-
-    public ForumPosts(Integer id, Date updateTime, String content) {
-        this.id = id;
-        this.updateTime = updateTime;
-        this.content = content;
-    }
+    private List<ForumImage> images;
+    private ForumLocation location;
+    private ForumVideo video;
 
     public Integer getId() {
         return id;

@@ -29,7 +29,13 @@ public class ForumLocation {
 		this.updateTime = updateTime;
 	}
 
-	public Integer getId() {
+    public ForumLocation(Integer postsId, Boolean deleted, Date updateTime) {
+        this.postsId = postsId;
+        this.deleted = deleted;
+        this.updateTime = updateTime;
+    }
+
+    public Integer getId() {
         return id;
     }
 

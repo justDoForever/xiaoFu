@@ -11,6 +11,43 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <resultMap id="ForumsResultMap" type="com.xiaofu.domain.dto.Forums" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="view_account" property="viewAccount" jdbcType="VARCHAR" />
+    <result column="relay_account" property="relayAccount" jdbcType="VARCHAR" />
+    <result column="like_account" property="likeAccount" jdbcType="VARCHAR" />
+    <result column="deleted" property="deleted" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+
+    <association property="location" javaType="com.xiaofu.domain.dto.ForumLocation">
+      <id column="id" property="id" jdbcType="INTEGER" />
+      <result column="posts_id" property="postsId" jdbcType="INTEGER" />
+      <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+      <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+      <result column="deleted" property="deleted" jdbcType="BIT" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </association>
+    <association property="video" javaType="com.xiaofu.domain.dto.ForumVideo">
+      <id column="id" property="id" jdbcType="INTEGER" />
+      <result column="posts_id" property="postsId" jdbcType="INTEGER" />
+      <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+      <result column="deleted" property="deleted" jdbcType="BIT" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </association>
+    <collection property="images" ofType="com.xiaofu.domain.dto.ForumImage">
+      <id column="id" property="id" jdbcType="INTEGER" />
+      <result column="posts_id" property="postsId" jdbcType="INTEGER" />
+      <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+      <result column="deleted" property="deleted" jdbcType="BIT" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </collection>
+  </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.xiaofu.domain.dto.ForumPosts" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
@@ -21,6 +58,14 @@
   <sql id="Blob_Column_List" >
     content
   </sql>
+
+  <select id="selectForums" resultMap="ForumsResultMap">
+    select *
+    from forum_posts fo
+    left join forum_location loc on fo.id = loc.posts_id
+    left join forum_video video on fo.id = video.posts_id
+    left join forum_image imag on fo.id = imag.posts_id
+  </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -157,4 +202,19 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+ <!-- <update id="deleteById" parameterType="com.xiaofu.domain.dto.ForumPosts" >
+    update forum_posts post
+    left join
+    forum_image ima,
+    forum_video video,
+    forum_location loca
+    on
+    ima.posts_id = post.id,
+    video.posts_id = post.id,
+    loca.posts_id = post.id
+    set
+    deleted = #{deleted,jdbcType=VARCHAR},
+    update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>-->
 </mapper>
