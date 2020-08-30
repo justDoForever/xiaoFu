@@ -25,6 +25,45 @@ public class Forums {
     private ForumLocation location;
     private ForumVideo video;
 
+    public List<ForumImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ForumImage> images) {
+        this.images = images;
+    }
+
+    public ForumLocation getLocation() {
+        return location;
+    }
+
+    public void setLocation(ForumLocation location) {
+        this.location = location;
+    }
+
+    public Forums() {
+    }
+
+    public ForumVideo getVideo() {
+        return video;
+    }
+
+    public void setVideo(ForumVideo video) {
+        this.video = video;
+    }
+
+    public Forums(Integer id, Integer studentId, String viewAccount, String relayAccount, String likeAccount, String deleted, Date createTime, Date updateTime, String content) {
+        this.id = id;
+        this.studentId = studentId;
+        this.viewAccount = viewAccount;
+        this.relayAccount = relayAccount;
+        this.likeAccount = likeAccount;
+        this.deleted = deleted;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.content = content;
+    }
+
     public Integer getId() {
         return id;
     }

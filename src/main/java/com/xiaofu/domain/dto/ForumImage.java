@@ -28,6 +28,9 @@ public class ForumImage {
   		this.updateTime = updateTime;
   	}
 
+    public ForumImage() {
+    }
+
     public ForumImage(Integer postsId, Boolean deleted, Date updateTime) {
         this.postsId = postsId;
         this.deleted = deleted;

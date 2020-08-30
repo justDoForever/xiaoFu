@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xiaofu.dao.ForumPostsRelay Mapper" >
-  <resultMap id="BaseResultMap" type="com.xiaofu.domain.dto.ForumPostsRelay " >
+  <resultMap id="BaseResultMap" type="com.xiaofu.domain.dto.ForumPostsRelay" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="posts_id" property="postsId" jdbcType="INTEGER" />
     <result column="student_id" property="studentId" jdbcType="INTEGER" />
@@ -9,7 +9,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.xiaofu.domain.dto.ForumPostsRelay " extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.xiaofu.domain.dto.ForumPostsRelay" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xiaofu.domain.dto.ForumPostsRelay " >
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaofu.domain.dto.ForumPostsRelay" >
     update forum_posts_relay
     <set >
       <if test="postsId != null" >
@@ -111,7 +111,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xiaofu.domain.dto.ForumPostsRelay " >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xiaofu.domain.dto.ForumPostsRelay" >
     update forum_posts_relay
     set posts_id = #{postsId,jdbcType=INTEGER},
       student_id = #{studentId,jdbcType=INTEGER},
@@ -121,7 +121,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xiaofu.domain.dto.ForumPostsRelay " >
+  <update id="updateByPrimaryKey" parameterType="com.xiaofu.domain.dto.ForumPostsRelay" >
     update forum_posts_relay
     set posts_id = #{postsId,jdbcType=INTEGER},
       student_id = #{studentId,jdbcType=INTEGER},

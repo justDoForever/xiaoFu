@@ -20,7 +20,7 @@ public class ForumLocation {
 
     public ForumLocation(Integer postsId, BigDecimal longitude, BigDecimal latitude, Boolean deleted, Date createTime,
 			Date updateTime) {
-		super();
+
 		this.postsId = postsId;
 		this.longitude = longitude;
 		this.latitude = latitude;
@@ -33,6 +33,9 @@ public class ForumLocation {
         this.postsId = postsId;
         this.deleted = deleted;
         this.updateTime = updateTime;
+    }
+
+    public ForumLocation() {
     }
 
     public Integer getId() {

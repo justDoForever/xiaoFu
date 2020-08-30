@@ -30,6 +30,9 @@ public class ForumVideo {
         this.updateTime = updateTime;
     }
 
+    public ForumVideo() {
+    }
+
     public ForumVideo(Integer id, String videoUrl, Date updateTime) {
         this.id = id;
         this.videoUrl = videoUrl;

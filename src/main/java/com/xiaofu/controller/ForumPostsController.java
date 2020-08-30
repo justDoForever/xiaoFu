@@ -2,10 +2,7 @@ package com.xiaofu.controller;
 
 import com.xiaofu.domain.dto.Forums;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.xiaofu.domain.dto.ForumInfo;
 import com.xiaofu.domain.response.ResultInfo;
@@ -38,7 +35,7 @@ public class ForumPostsController {
         return forumService.update(forumInfo);
     }
     @ApiOperation(value = "查询贴子", notes = "查询帖子", produces = "application/json")
-    @PostMapping("/getForums")
+    @GetMapping("/getForums")
     public List<Forums> getForum(){
         return forumService.getForums();
     }
