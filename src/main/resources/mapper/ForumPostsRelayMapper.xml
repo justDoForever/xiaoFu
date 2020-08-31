@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xiaofu.dao.ForumPostsRelay Mapper" >
+<mapper namespace="com.xiaofu.dao.ForumPostsRelayDao" >
   <resultMap id="BaseResultMap" type="com.xiaofu.domain.dto.ForumPostsRelay" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="posts_id" property="postsId" jdbcType="INTEGER" />
     <result column="student_id" property="studentId" jdbcType="INTEGER" />
     <result column="deleted" property="deleted" jdbcType="BIT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time"  property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time"  property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.xiaofu.domain.dto.ForumPostsRelay" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -25,6 +25,14 @@
     <include refid="Blob_Column_List" />
     from forum_posts_relay
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getAll" resultMap="ResultMapWithBLOBs"  >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from forum_posts_relay
+    where deleted = 0
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from forum_posts_relay

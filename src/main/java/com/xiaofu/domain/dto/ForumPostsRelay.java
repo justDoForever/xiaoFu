@@ -17,6 +17,25 @@ public class ForumPostsRelay {
 
     private String content;
 
+    public ForumPostsRelay() {
+    }
+
+    public ForumPostsRelay(Integer id, Integer postsId, Integer studentId, Boolean deleted, Date createTime, Date updateTime, String content) {
+        this.id = id;
+        this.postsId = postsId;
+        this.studentId = studentId;
+        this.deleted = deleted;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.content = content;
+    }
+
+    public ForumPostsRelay(Integer id, Boolean deleted, Date updateTime) {
+        this.id = id;
+        this.deleted = deleted;
+        this.updateTime = updateTime;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -70,6 +89,6 @@ public class ForumPostsRelay {
     }
 
     public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+        this.content = content;
     }
 }

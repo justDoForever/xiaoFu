@@ -62,9 +62,10 @@
   <select id="selectForums" resultMap="ForumsResultMap">
     select *
     from forum_posts fo
-    left join forum_location loc on fo.id = loc.posts_id
-    left join forum_video video on fo.id = video.posts_id
-    left join forum_image imag on fo.id = imag.posts_id
+    left join forum_location loc on (fo.id = loc.posts_id and loc.deleted = 0)
+    left join forum_video video on (fo.id = video.posts_id and video.deleted = 0)
+    left join forum_image imag on (fo.id = imag.posts_id and imag.deleted = 0)
+    where fo.deleted = "0"
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
