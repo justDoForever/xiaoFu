@@ -9,6 +9,7 @@ import com.xiaofu.domain.enums.ResponseEnum;
 import com.xiaofu.domain.response.ResultInfo;
 import com.xiaofu.util.JWTUtils;
 import com.xiaofu.util.okhttp.OkHttpCli;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,21 +27,23 @@ import java.util.Map;
 @RequestMapping("/login")
 public class LoginController {
 
-    private static String APPID = "1108100302";
-    private static String SECRET = "iKnid6CcpM1mvXvh";
-    private static String GRANT_TYPE = "authorization_code";
-    private static String CODE2SESSION_URL = "https://api.q.qq.com/sns/jscode2session";
+    private static final String APPID = "1110779203";
+    private static final String SECRET = "iKnid6CcpM1mvXvh";
+    private static final String GRANT_TYPE_SESSION = "authorization_code";
+    private static final String CODE2SESSION_URL = "https://api.q.qq.com/sns/jscode2session";
+    private static final String ACCESS_TOKEN_URL = "https://api.q.qq.com/api/getToken";
+    private static final String GRANT_TYPE_TOKEN = "client_credential";
 
     @Autowired
     OkHttpCli okHttpCli;
 
     /**
      * 请求qq的登陆API获得openid和session_key，验证用户合理性。
-     * 如果成功就构造token返回客户端
      *
      * @param code 前端code码
-     * @return token
+     * @return openid和session_key
      */
+    @ApiOperation(value = "获取token", notes = "获取token", produces = "application/json")
     @GetMapping("/getToken")
     public ResultInfo<Object> getToken(String code) {
         ResultInfo<Object> resultInfo = null;
@@ -52,21 +55,14 @@ public class LoginController {
             params.put("appid", APPID);
             params.put("secret", SECRET);
             params.put("js_code", code);
-            params.put("grant_type", GRANT_TYPE);
+            params.put("grant_type", GRANT_TYPE_SESSION);
             //使用qq提供的api去验证code的正确性
             JSONObject resultJson = okHttpCli.doGetParams(CODE2SESSION_URL, params);
             if (resultJson.getIntValue("errcode") == 0) {
                 //请求成功，得到openid和session_key
-                String openId = resultJson.getString("openid");
-                String sessionKey = resultJson.getString("session_key");
-                //生成token
-                Map<String, String> map = new HashMap<>();
-                map.put("openid", openId);
-                String token = JWTUtils.getToken(map);
-                //组装最后结果
                 Map<String, String> results = new HashMap<>();
-                results.put("token", token);
-                results.put("session_key", sessionKey);
+                results.put("openid", resultJson.getString("openid"));
+                results.put("session_key", resultJson.getString("session_key"));
                 resultInfo = new ResultInfo<>(ResponseEnum.SUCCESS, results);
             } else {
                 //返回不为0，请求失败
@@ -77,11 +73,42 @@ public class LoginController {
     }
 
     /**
+     * getAccessToken接口，在这里直接访问qq的api获得AccessToken返回给前端
+     * 前端会感知到AccessToken失效，并访问此接口从新获取
+     *
+     * @return AccessToken
+     */
+    @ApiOperation(value = "获取AccessToken", notes = "获取AccessToken", produces = "application/json")
+    @GetMapping("/getAccessToken")
+    public ResultInfo<Object> getAccessToken() {
+        ResultInfo<Object> resultInfo = null;
+        //封装访问getAccessToken的参数
+        Map<String, Object> params = new HashMap<>();
+        params.put("grant_type", GRANT_TYPE_TOKEN);
+        params.put("appid", APPID);
+        params.put("secret", SECRET);
+        //使用okhttp发送请求
+        JSONObject resultJson = okHttpCli.doGetParams(ACCESS_TOKEN_URL, params);
+        if (resultJson.getIntValue("errcode") == 0) {
+            //请求成功，得到 access_token 和 expires_in
+            Map<String, String> results = new HashMap<>();
+            results.put("access_token", resultJson.getString("access_token"));
+            results.put("expires_in", resultJson.getString("expires_in"));
+            resultInfo = new ResultInfo<>(ResponseEnum.SUCCESS, results);
+        } else {
+            //返回不为0，请求失败
+            resultInfo = new ResultInfo<>(ResponseEnum.CUSTOM_ERROR, resultJson.getString("errmsg"));
+        }
+        return resultInfo;
+    }
+
+    /**
      * 验证token的正确性
      *
      * @param token 前端传过来的token
      * @return 验证结果
      */
+    @ApiOperation(value = "验证token", notes = "验证token", produces = "application/json")
     @GetMapping("/verifyToken")
     public ResultInfo<String> verifyToken(String token) {
         ResultInfo<String> resultInfo = null;

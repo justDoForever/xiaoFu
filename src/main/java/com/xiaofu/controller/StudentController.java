@@ -4,6 +4,7 @@ import com.xiaofu.domain.dto.Student;
 import com.xiaofu.domain.enums.ResponseEnum;
 import com.xiaofu.domain.response.ResultInfo;
 import com.xiaofu.service.StudentService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+    @ApiOperation(value = "查询学生信息", notes = "查询学生信息", produces = "application/json")
     @GetMapping("/getInfo")
     public ResultInfo<Student> getInfo(Integer id) {
         ResultInfo<Student> resultInfo = null;
@@ -32,6 +34,7 @@ public class StudentController {
         return resultInfo;
     }
 
+    @ApiOperation(value = "添加学生", notes = "添加学生", produces = "application/json")
     @PostMapping("/add")
     public ResultInfo<String> addStudent(@RequestBody Student student) {
         ResultInfo<String> resultInfo = null;
@@ -50,6 +53,7 @@ public class StudentController {
         return resultInfo;
     }
 
+    @ApiOperation(value = "删除学生", notes = "删除学生", produces = "application/json")
     @GetMapping("/delete")
     public ResultInfo<String> deleteStudent(Integer id) {
         ResultInfo<String> resultInfo = null;
@@ -62,6 +66,7 @@ public class StudentController {
         return resultInfo;
     }
 
+    @ApiOperation(value = "更新学生信息", notes = "更新学生信息", produces = "application/json")
     @PostMapping("/update")
     public ResultInfo<String> updateStudent(@RequestBody Student student) {
         ResultInfo<String> resultInfo = null;

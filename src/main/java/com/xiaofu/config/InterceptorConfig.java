@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 配置该应用的拦截器。
  * 如果需要单独测试你们的方法，可以先将@Configuration去掉
  */
-@Configuration
+// @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
