@@ -38,68 +38,75 @@ public class LoginController {
     OkHttpCli okHttpCli;
 
     /**
-     * 请求qq的登陆API获得openid和session_key，验证用户合理性。
+     * 请求qq的登陆API获得openid和session_key，验证用户合理性，并同时获取AccessToken返回。
      *
      * @param code 前端code码
-     * @return openid和session_key
+     * @return openid和session_key以及AccessToken
      */
-    @ApiOperation(value = "获取token", notes = "获取token", produces = "application/json")
-    @GetMapping("/getToken")
-    public ResultInfo<Object> getToken(String code) {
+    @ApiOperation(value = "获取AccessToken", notes = "获取AccessToken", produces = "application/json")
+    @GetMapping("/getAccessToken")
+    public ResultInfo<Object> getAccessToken(String code) {
         ResultInfo<Object> resultInfo = null;
         if (StringUtils.isEmpty(code)) {
             resultInfo = new ResultInfo<>(ResponseEnum.CUSTOM_ERROR, "没有code参数");
         } else {
-            //封装code2session的参数
-            Map<String, Object> params = new HashMap<>();
-            params.put("appid", APPID);
-            params.put("secret", SECRET);
-            params.put("js_code", code);
-            params.put("grant_type", GRANT_TYPE_SESSION);
-            //使用qq提供的api去验证code的正确性
-            JSONObject resultJson = okHttpCli.doGetParams(CODE2SESSION_URL, params);
-            if (resultJson.getIntValue("errcode") == 0) {
-                //请求成功，得到openid和session_key
+            //请求code2session
+            JSONObject responseSession = getSessionFromQQ(code);
+            int errcodeSession = responseSession.getIntValue("errcode");
+            //请求getAccessToken
+            JSONObject responseAccessToken = getAccessTokenFromQQ();
+            int errcodeAccessToken = responseAccessToken.getIntValue("errcode");
+            if (errcodeSession == 0 && errcodeAccessToken == 0) {
+                //请求成功，得到openid和session_key以及AccessToken
                 Map<String, String> results = new HashMap<>();
-                results.put("openid", resultJson.getString("openid"));
-                results.put("session_key", resultJson.getString("session_key"));
+                results.put("openid", responseSession.getString("openid"));
+                results.put("session_key", responseSession.getString("session_key"));
+                results.put("access_token", responseAccessToken.getString("access_token"));
                 resultInfo = new ResultInfo<>(ResponseEnum.SUCCESS, results);
             } else {
-                //返回不为0，请求失败
-                resultInfo = new ResultInfo<>(ResponseEnum.CUSTOM_ERROR, resultJson.getString("errmsg"));
+                //返回不为0，请求失败，封装错误信息
+                //如果两个都请求失败，只返回AccessToken的错误信息
+                String errmsg;
+                if (errcodeSession != 0) {
+                    errmsg = responseSession.getString("errmsg");
+                } else {
+                    errmsg = responseAccessToken.getString("errmsg");
+                }
+                resultInfo = new ResultInfo<>(ResponseEnum.CUSTOM_ERROR, errmsg);
             }
         }
         return resultInfo;
     }
 
     /**
-     * getAccessToken接口，在这里直接访问qq的api获得AccessToken返回给前端
-     * 前端会感知到AccessToken失效，并访问此接口从新获取
+     * 请求qq的code2session接口
      *
-     * @return AccessToken
+     * @param code js_code
+     * @return 请求结果
      */
-    @ApiOperation(value = "获取AccessToken", notes = "获取AccessToken", produces = "application/json")
-    @GetMapping("/getAccessToken")
-    public ResultInfo<Object> getAccessToken() {
-        ResultInfo<Object> resultInfo = null;
+    private JSONObject getSessionFromQQ(String code) {
+        //封装code2session的参数
+        Map<String, Object> params = new HashMap<>();
+        params.put("appid", APPID);
+        params.put("secret", SECRET);
+        params.put("js_code", code);
+        params.put("grant_type", GRANT_TYPE_SESSION);
+        //使用qq提供的api去验证code的正确性
+        return okHttpCli.doGetParams(CODE2SESSION_URL, params);
+    }
+
+    /**
+     * 访问qq的getAccessToken接口
+     *
+     * @return 请求结果
+     */
+    private JSONObject getAccessTokenFromQQ() {
         //封装访问getAccessToken的参数
         Map<String, Object> params = new HashMap<>();
         params.put("grant_type", GRANT_TYPE_TOKEN);
         params.put("appid", APPID);
         params.put("secret", SECRET);
-        //使用okhttp发送请求
-        JSONObject resultJson = okHttpCli.doGetParams(ACCESS_TOKEN_URL, params);
-        if (resultJson.getIntValue("errcode") == 0) {
-            //请求成功，得到 access_token 和 expires_in
-            Map<String, String> results = new HashMap<>();
-            results.put("access_token", resultJson.getString("access_token"));
-            results.put("expires_in", resultJson.getString("expires_in"));
-            resultInfo = new ResultInfo<>(ResponseEnum.SUCCESS, results);
-        } else {
-            //返回不为0，请求失败
-            resultInfo = new ResultInfo<>(ResponseEnum.CUSTOM_ERROR, resultJson.getString("errmsg"));
-        }
-        return resultInfo;
+        return okHttpCli.doGetParams(ACCESS_TOKEN_URL, params);
     }
 
     /**
